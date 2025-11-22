@@ -1,0 +1,37 @@
+name: Update Website
+
+on: 
+  push:
+
+  schedule:
+
+    - cron: '0 0 * * 0'  # Runs every week
+    
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+  
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - run: echo "$PWD"
+    - run: ls -a
+    - run: git config --global user.email "jcaulkins@wisc.edu"
+    - run: git config --global user.name "jcaulkins"
+    - run: chmod +x update_weekly.sh
+    - run: ./update_weekly.sh
