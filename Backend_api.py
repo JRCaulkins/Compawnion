@@ -10,19 +10,18 @@ import hashlib
 import secrets
 from datetime import datetime, timedelta
 import os
-import traceback
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', secrets.token_hex(32))
 
-# ==================== IMPROVED CORS CONFIGURATION ====================
-# Allow requests from GitHub Pages
+# Configure CORS properly for GitHub Pages
 CORS(app, 
      resources={r"/api/*": {
          "origins": [
              "https://jrcaulkins.github.io",
              "http://localhost:*",
-             "http://127.0.0.1:*"
+             "http://127.0.0.1:*",
+             "http://localhost:8888"
          ],
          "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
          "allow_headers": ["Content-Type", "Authorization"],
@@ -94,7 +93,7 @@ def init_db():
     
     conn.commit()
     conn.close()
-    print("✅ Database initialized")
+    print("âœ… Database initialized")
 
 def hash_password(password):
     """Hash a password using SHA-256 with salt"""
@@ -114,39 +113,7 @@ def create_session_token():
     """Generate a secure session token"""
     return secrets.token_urlsafe(32)
 
-# ==================== ERROR HANDLERS ====================
-
-@app.errorhandler(404)
-def not_found(error):
-    return jsonify({'error': 'Endpoint not found'}), 404
-
-@app.errorhandler(500)
-def internal_error(error):
-    return jsonify({'error': 'Internal server error'}), 500
-
-@app.errorhandler(Exception)
-def handle_exception(e):
-    """Handle uncaught exceptions"""
-    print(f"❌ Unhandled exception: {str(e)}")
-    print(traceback.format_exc())
-    return jsonify({
-        'error': 'An unexpected error occurred',
-        'details': str(e) if app.debug else 'Please try again later'
-    }), 500
-
 # ==================== API ENDPOINTS ====================
-
-@app.route('/api/health', methods=['GET', 'OPTIONS'])
-def health_check():
-    """Health check endpoint"""
-    if request.method == 'OPTIONS':
-        return '', 204
-    
-    return jsonify({
-        'status': 'healthy',
-        'timestamp': datetime.now().isoformat(),
-        'version': '1.0.0'
-    }), 200
 
 @app.route('/api/register', methods=['POST', 'OPTIONS'])
 def register():
@@ -154,24 +121,21 @@ def register():
     if request.method == 'OPTIONS':
         return '', 204
     
+    data = request.json
+    
+    # Validate input
+    if not data.get('username') or not data.get('email') or not data.get('password'):
+        return jsonify({'error': 'Username, email, and password are required'}), 400
+    
+    username = data['username'].strip()
+    email = data['email'].strip().lower()
+    password = data['password']
+    
+    # Validate password strength
+    if len(password) < 8:
+        return jsonify({'error': 'Password must be at least 8 characters long'}), 400
+    
     try:
-        data = request.json
-        
-        # Validate input
-        if not data:
-            return jsonify({'error': 'No data provided'}), 400
-        
-        if not data.get('username') or not data.get('email') or not data.get('password'):
-            return jsonify({'error': 'Username, email, and password are required'}), 400
-        
-        username = data['username'].strip()
-        email = data['email'].strip().lower()
-        password = data['password']
-        
-        # Validate password strength
-        if len(password) < 8:
-            return jsonify({'error': 'Password must be at least 8 characters long'}), 400
-        
         conn = get_db_connection()
         cursor = conn.cursor()
         
@@ -179,7 +143,6 @@ def register():
         cursor.execute('SELECT user_id FROM users WHERE username = ? OR email = ?', 
                       (username, email))
         if cursor.fetchone():
-            conn.close()
             return jsonify({'error': 'Username or email already exists'}), 409
         
         # Hash password and create user
@@ -193,8 +156,6 @@ def register():
         conn.commit()
         conn.close()
         
-        print(f"✅ New user registered: {username} (ID: {user_id})")
-        
         return jsonify({
             'message': 'User registered successfully',
             'user_id': user_id,
@@ -202,12 +163,7 @@ def register():
         }), 201
         
     except sqlite3.IntegrityError as e:
-        print(f"❌ Database integrity error: {str(e)}")
-        return jsonify({'error': 'Registration failed: Database error'}), 500
-    except Exception as e:
-        print(f"❌ Registration error: {str(e)}")
-        print(traceback.format_exc())
-        return jsonify({'error': f'Registration failed: {str(e)}'}), 500
+        return jsonify({'error': 'Registration failed: ' + str(e)}), 500
 
 @app.route('/api/login', methods=['POST', 'OPTIONS'])
 def login():
@@ -215,15 +171,15 @@ def login():
     if request.method == 'OPTIONS':
         return '', 204
     
+    data = request.json
+    
+    if not data.get('username') or not data.get('password'):
+        return jsonify({'error': 'Username and password are required'}), 400
+    
+    username = data['username'].strip()
+    password = data['password']
+    
     try:
-        data = request.json
-        
-        if not data or not data.get('username') or not data.get('password'):
-            return jsonify({'error': 'Username and password are required'}), 400
-        
-        username = data['username'].strip()
-        password = data['password']
-        
         conn = get_db_connection()
         cursor = conn.cursor()
         
@@ -237,7 +193,6 @@ def login():
         user = cursor.fetchone()
         
         if not user or not verify_password(password, user['password_hash']):
-            conn.close()
             return jsonify({'error': 'Invalid username or password'}), 401
         
         # Update last login and login count
@@ -266,8 +221,6 @@ def login():
         session['username'] = user['username']
         session['session_token'] = session_token
         
-        print(f"✅ User logged in: {user['username']}")
-        
         return jsonify({
             'message': 'Login successful',
             'user': {
@@ -280,9 +233,7 @@ def login():
         }), 200
         
     except Exception as e:
-        print(f"❌ Login error: {str(e)}")
-        print(traceback.format_exc())
-        return jsonify({'error': f'Login failed: {str(e)}'}), 500
+        return jsonify({'error': 'Login failed: ' + str(e)}), 500
 
 @app.route('/api/logout', methods=['POST', 'OPTIONS'])
 def logout():
@@ -300,9 +251,8 @@ def logout():
                           (session_token,))
             conn.commit()
             conn.close()
-            print(f"✅ User logged out")
-        except Exception as e:
-            print(f"❌ Logout error: {str(e)}")
+        except:
+            pass
     
     session.clear()
     return jsonify({'message': 'Logged out successfully'}), 200
@@ -333,7 +283,6 @@ def get_profile():
         user = cursor.fetchone()
         
         if not user:
-            conn.close()
             return jsonify({'error': 'Invalid or expired session'}), 401
         
         # Get user statistics
@@ -369,8 +318,6 @@ def get_profile():
         }), 200
         
     except Exception as e:
-        print(f"❌ Profile error: {str(e)}")
-        print(traceback.format_exc())
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/user/last-login', methods=['GET', 'OPTIONS'])
@@ -407,20 +354,30 @@ def get_last_login():
         }), 200
         
     except Exception as e:
-        print(f"❌ Last login error: {str(e)}")
         return jsonify({'error': str(e)}), 500
+
+@app.route('/api/health', methods=['GET', 'OPTIONS'])
+def health_check():
+    """Health check endpoint"""
+    if request.method == 'OPTIONS':
+        return '', 204
+    
+    return jsonify({
+        'status': 'healthy',
+        'timestamp': datetime.now().isoformat()
+    }), 200
 
 # ==================== INITIALIZE & RUN ====================
 
 if __name__ == '__main__':
     print("=" * 60)
-    print("🐕 Compawnion Backend API Server")
+    print("ðŸ• Compawnion Backend API Server")
     print("=" * 60)
     
     # Initialize database
     init_db()
     
-    print("\n📋 Available Endpoints:")
+    print("\nðŸ“‹ Available Endpoints:")
     print("  POST   /api/register       - Register new user")
     print("  POST   /api/login          - User login")
     print("  POST   /api/logout         - User logout")
@@ -428,9 +385,8 @@ if __name__ == '__main__':
     print("  GET    /api/user/last-login - Get last login info")
     print("  GET    /api/health         - Health check")
     
-    print("\n🚀 Starting server...")
+    print("\nðŸš€ Starting server on http://localhost:5000")
     print("=" * 60)
     
     # Run the server
-    port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=5000)
