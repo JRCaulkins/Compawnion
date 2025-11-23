@@ -61,6 +61,197 @@
             margin-top: 10px;
         }
 
+        /* Auth Section in Banner */
+        .auth-section {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .auth-buttons button {
+            background: white;
+            color: #4facfe;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .auth-buttons button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info span {
+            color: white;
+            font-weight: 600;
+        }
+
+        .user-info button {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 1px solid white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .user-info button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #4facfe;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .form-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: #ff4444;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success-message {
+            background: #44ff44;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
         /* Container */
         .container {
             max-width: 1200px;
@@ -71,7 +262,30 @@
             overflow: hidden;
         }
 
-        /* Tab Navigation */
+        /* User Welcome Message */
+        .welcome-message {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px 20px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .welcome-message.active {
+            display: flex;
+        }
+
+        .welcome-text {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .last-login {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* Rest of the original styles... */
         .tabs {
             display: flex;
             background: #f8f9fa;
@@ -111,7 +325,6 @@
             background: #4facfe;
         }
 
-        /* Tab Content */
         .tab-content {
             display: none;
             padding: 20px;
@@ -122,12 +335,6 @@
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Map Styles */
         #map {
             height: 500px;
             border-radius: 10px;
@@ -163,7 +370,6 @@
             background: #3a8fe0;
         }
 
-        /* Activity Suggestions */
         .weather-info {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -201,7 +407,6 @@
             line-height: 1.6;
         }
 
-        /* Mental Health Tips */
         .tip-card {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             padding: 20px;
@@ -239,14 +444,91 @@
     </style>
 </head>
 <body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🐕 Login</h2>
+                <button class="close-btn" onclick="closeModal('loginModal')">&times;</button>
+            </div>
+            <div class="error-message" id="loginError"></div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginUsername">Username or Email</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="form-btn">Login</button>
+            </form>
+            <div class="form-footer">
+                Don't have an account? <a href="#" onclick="switchToSignup()">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🐾 Sign Up</h2>
+                <button class="close-btn" onclick="closeModal('signupModal')">&times;</button>
+            </div>
+            <div class="error-message" id="signupError"></div>
+            <div class="success-message" id="signupSuccess"></div>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required minlength="3">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required minlength="8">
+                </div>
+                <div class="form-group">
+                    <label for="signupPasswordConfirm">Confirm Password</label>
+                    <input type="password" id="signupPasswordConfirm" required minlength="8">
+                </div>
+                <button type="submit" class="form-btn">Create Account</button>
+            </form>
+            <div class="form-footer">
+                Already have an account? <a href="#" onclick="switchToLogin()">Login</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Banner -->
     <div class="banner">
+        <div class="auth-section">
+            <div id="authButtons" class="auth-buttons">
+                <button onclick="openModal('loginModal')">Login</button>
+                <button onclick="openModal('signupModal')">Sign Up</button>
+            </div>
+            <div id="userInfo" class="user-info" style="display: none;">
+                <span id="usernameDisplay"></span>
+                <button onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
         <h1>🐾 Mindful ComPawnion 🐾</h1>
         <p>Your Perfect Dog Activity Companion</p>
     </div>
 
     <div class="container">
-        <!-- Tab Navigation -->
+        <!-- Welcome Message -->
+        <div id="welcomeMessage" class="welcome-message">
+            <div>
+                <div class="welcome-text">Welcome back, <span id="welcomeUsername"></span>! 🐶</div>
+                <div class="last-login" id="lastLoginText"></div>
+            </div>
+        </div>
+
+        <!-- Rest of your original content (tabs, map, etc.) -->
         <div class="tabs">
             <button class="tab-button active" onclick="showTab('map-tab')">🗺️ Dog Parks Map</button>
             <button class="tab-button" onclick="showTab('activities-tab')">🎾 Activity Suggestions</button>
@@ -274,9 +556,7 @@
                 <h3>📊 Current Conditions</h3>
                 <p class="loading">Loading weather data...</p>
             </div>
-            <div class="activity-grid" id="activity-grid">
-                <!-- Activities will be populated dynamically -->
-            </div>
+            <div class="activity-grid" id="activity-grid"></div>
         </div>
 
         <!-- Mental Health Tips Tab -->
@@ -287,47 +567,23 @@
                 <h3>🧘 Regular Exercise Benefits Both of You</h3>
                 <p>Daily walks and playtime aren't just good for your dog's physical health—they boost mental wellbeing for both of you! Exercise releases endorphins, reduces stress, and strengthens your bond.</p>
                 <div class="info-box">
-                    <strong>Try this:</strong> Aim for at least 30 minutes of outdoor activity daily. Even a short walk can improve mood and reduce anxiety.
+                    <strong>Try this:</strong> Aim for at least 30 minutes of outdoor activity daily.
                 </div>
             </div>
 
             <div class="tip-card">
                 <h3>🎯 Establish Routines</h3>
-                <p>Dogs thrive on routine, and so do humans! Consistent feeding times, walks, and play sessions create a sense of security and reduce stress for both you and your furry friend.</p>
+                <p>Dogs thrive on routine, and so do humans! Consistent feeding times, walks, and play sessions create a sense of security.</p>
                 <div class="info-box">
-                    <strong>Try this:</strong> Create a daily schedule for walks, meals, and playtime. Stick to it as much as possible.
+                    <strong>Try this:</strong> Create a daily schedule for walks, meals, and playtime.
                 </div>
             </div>
 
             <div class="tip-card">
                 <h3>🤝 Socialization Matters</h3>
-                <p>Dog parks and group walks provide social interaction for your dog and can help you connect with other pet owners, reducing feelings of isolation.</p>
+                <p>Dog parks and group walks provide social interaction for your dog and can help you connect with other pet owners.</p>
                 <div class="info-box">
-                    <strong>Try this:</strong> Visit dog parks during busy hours or join local dog walking groups to meet new friends.
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <h3>🧠 Mental Stimulation</h3>
-                <p>Keep your dog's mind active with puzzle toys, training sessions, and new experiences. Mental stimulation prevents boredom and destructive behaviors.</p>
-                <div class="info-box">
-                    <strong>Try this:</strong> Introduce a new trick or command each week, or rotate toys to keep things interesting.
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <h3>💤 Rest and Relaxation</h3>
-                <p>Just as important as activity! Make sure both you and your dog get adequate rest. Quiet time together can be deeply calming.</p>
-                <div class="info-box">
-                    <strong>Try this:</strong> Set aside 15 minutes daily for quiet bonding time—gentle petting or just sitting together.
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <h3>⚠️ Recognize Signs of Stress</h3>
-                <p>Learn to identify stress signals in your dog (excessive panting, pacing, destructive behavior) and yourself (irritability, fatigue, withdrawal). Address these early.</p>
-                <div class="info-box">
-                    <strong>Seek help:</strong> If you're struggling with mental health, reach out to a professional. If your dog shows persistent stress, consult a veterinarian or animal behaviorist.
+                    <strong>Try this:</strong> Visit dog parks during busy hours or join local dog walking groups.
                 </div>
             </div>
         </div>
@@ -336,21 +592,214 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="dog_parks.js"></script>
     <script>
-        // Initialize map centered on Madison, Wisconsin
+        // ==================== AUTHENTICATION ====================
+        
+        const API_URL = 'http://localhost:5000/api';
+        let currentUser = null;
+        let sessionToken = null;
+
+        // Load session from localStorage
+        function loadSession() {
+            const savedSession = localStorage.getItem('compawnion_session');
+            if (savedSession) {
+                const session = JSON.parse(savedSession);
+                sessionToken = session.token;
+                currentUser = session.user;
+                updateUIForLoggedInUser();
+                fetchUserProfile();
+            }
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            // Clear error messages
+            const errorEls = document.querySelectorAll('.error-message');
+            errorEls.forEach(el => el.style.display = 'none');
+        }
+
+        function switchToSignup() {
+            closeModal('loginModal');
+            openModal('signupModal');
+        }
+
+        function switchToLogin() {
+            closeModal('signupModal');
+            openModal('loginModal');
+        }
+
+        // Handle login
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const response = await fetch(`${API_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Save session
+                    sessionToken = data.session_token;
+                    currentUser = data.user;
+                    localStorage.setItem('compawnion_session', JSON.stringify({
+                        token: sessionToken,
+                        user: currentUser
+                    }));
+                    
+                    // Update UI
+                    updateUIForLoggedInUser();
+                    closeModal('loginModal');
+                    document.getElementById('loginForm').reset();
+                } else {
+                    showError('loginError', data.error);
+                }
+            } catch (error) {
+                showError('loginError', 'Login failed. Please check your connection.');
+            }
+        }
+
+        // Handle signup
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('signupUsername').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const passwordConfirm = document.getElementById('signupPasswordConfirm').value;
+            
+            if (password !== passwordConfirm) {
+                showError('signupError', 'Passwords do not match');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showSuccess('signupSuccess', 'Account created! Please login.');
+                    document.getElementById('signupForm').reset();
+                    setTimeout(() => switchToLogin(), 2000);
+                } else {
+                    showError('signupError', data.error);
+                }
+            } catch (error) {
+                showError('signupError', 'Signup failed. Please try again.');
+            }
+        }
+
+        // Handle logout
+        async function handleLogout() {
+            try {
+                await fetch(`${API_URL}/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': sessionToken
+                    }
+                });
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+            
+            // Clear session
+            sessionToken = null;
+            currentUser = null;
+            localStorage.removeItem('compawnion_session');
+            updateUIForLoggedOutUser();
+        }
+
+        // Fetch user profile
+        async function fetchUserProfile() {
+            if (!sessionToken) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/user/profile`, {
+                    headers: {
+                        'Authorization': sessionToken
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayLastLogin(data.user.last_login);
+                } else {
+                    // Session expired
+                    handleLogout();
+                }
+            } catch (error) {
+                console.error('Failed to fetch profile:', error);
+            }
+        }
+
+        // UI update functions
+        function updateUIForLoggedInUser() {
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'flex';
+            document.getElementById('usernameDisplay').textContent = currentUser.username;
+            document.getElementById('welcomeMessage').classList.add('active');
+            document.getElementById('welcomeUsername').textContent = currentUser.username;
+        }
+
+        function updateUIForLoggedOutUser() {
+            document.getElementById('authButtons').style.display = 'block';
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('welcomeMessage').classList.remove('active');
+        }
+
+        function displayLastLogin(lastLogin) {
+            if (lastLogin) {
+                const date = new Date(lastLogin);
+                const formatted = date.toLocaleString();
+                document.getElementById('lastLoginText').textContent = `Last login: ${formatted}`;
+            }
+        }
+
+        function showError(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+
+        function showSuccess(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+
+        // ==================== MAP & ORIGINAL FUNCTIONALITY ====================
+        
         const map = L.map('map').setView([43.0731, -89.4012], 12);
         let userMarker = null;
 
-        // Add tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Â© OpenStreetMap contributors',
+            attribution: '© OpenStreetMap contributors',
             maxZoom: 19
         }).addTo(map);
 
-        // Load dog parks from external file (dog_parks.js)
         const dogParks = typeof dogParksData !== 'undefined' ? dogParksData : [];
 
-
-        // Add dog park markers
         const dogIcon = L.icon({
             iconUrl: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjNGZhY2ZlIj48cGF0aCBkPSJNMTIgMkMyIDIgMiAxMCAyIDEwczMgMyA1IDNoMTBjMiAwIDUtMyA1LTNzMC04LTEwLTh6Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iNCIgZmlsbD0iIzRmYWNmZSIvPjwvc3ZnPg==',
             iconSize: [32, 32],
@@ -364,7 +813,6 @@
                 .addTo(map);
         });
 
-        // Function to set user location manually
         async function setUserLocation() {
             const input = document.getElementById('location-input').value;
             if (!input) {
@@ -373,7 +821,6 @@
             }
 
             try {
-                // Use Nominatim geocoding API
                 const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(input)}`);
                 const data = await response.json();
 
@@ -393,7 +840,6 @@
             }
         }
 
-        // Function to use browser geolocation
         function useCurrentLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -413,7 +859,6 @@
             }
         }
 
-        // Update user marker on map
         function updateUserMarker(lat, lng) {
             if (userMarker) {
                 map.removeLayer(userMarker);
@@ -431,14 +876,12 @@
             .addTo(map);
         }
 
-        // Activity recommendation system
         async function generateActivityRecommendations(lat, lng) {
             const weatherInfo = document.getElementById('weather-info');
             const activityGrid = document.getElementById('activity-grid');
 
-            // Simulate weather data (in production, this would call a real API)
             const mockWeather = {
-                temp: Math.floor(Math.random() * 40) + 40, // 40-80°F
+                temp: Math.floor(Math.random() * 40) + 40,
                 condition: ['sunny', 'cloudy', 'rainy', 'snowy'][Math.floor(Math.random() * 4)],
                 windSpeed: Math.floor(Math.random() * 20) + 5
             };
@@ -450,7 +893,6 @@
                 <p><strong>Wind Speed:</strong> ${mockWeather.windSpeed} mph</p>
             `;
 
-            // Generate activity recommendations based on "weather"
             const activities = getActivityRecommendations(mockWeather);
             
             activityGrid.innerHTML = activities.map(activity => `
@@ -463,7 +905,6 @@
             `).join('');
         }
 
-        // Activity recommendation logic
         function getActivityRecommendations(weather) {
             const activities = [];
 
@@ -472,15 +913,8 @@
                     icon: '🏊',
                     name: 'Swimming',
                     duration: '30-45 min',
-                    description: 'Great exercise that\'s easy on joints. Find a dog-friendly lake or pool.',
+                    description: 'Great exercise that\'s easy on joints.',
                     reason: 'Perfect weather for water activities!'
-                });
-                activities.push({
-                    icon: '🚴',
-                    name: 'Bike Ride Together',
-                    duration: '20-30 min',
-                    description: 'Attach a bike leash and enjoy a ride. Start slow!',
-                    reason: 'Beautiful sunny weather for outdoor adventures'
                 });
             }
 
@@ -494,74 +928,33 @@
                 });
             }
 
-            if (weather.condition === 'rainy' || weather.temp < 40) {
-                activities.push({
-                    icon: '🧩',
-                    name: 'Indoor Puzzle Games',
-                    duration: '15-20 min',
-                    description: 'Hide treats around the house for a scavenger hunt.',
-                    reason: 'Weather isn\'t ideal for outdoor activities'
-                });
-                activities.push({
-                    icon: '🎓',
-                    name: 'Training Session',
-                    duration: '20-30 min',
-                    description: 'Practice commands or learn new tricks indoors.',
-                    reason: 'Perfect indoor activity for mental stimulation'
-                });
-            }
-
-            // Always include these activities
             activities.push({
                 icon: '🎾',
                 name: 'Fetch at the Park',
                 duration: '20-30 min',
-                description: 'Classic game that never gets old. Bring their favorite toy!',
+                description: 'Classic game that never gets old!',
                 reason: 'Great for bonding and exercise'
             });
 
-            activities.push({
-                icon: '🤝',
-                name: 'Dog Park Socialization',
-                duration: '30-45 min',
-                description: 'Let your dog interact with other dogs and make friends.',
-                reason: 'Important for social development'
-            });
-
-            if (weather.temp > 50) {
-                activities.push({
-                    icon: '🥏',
-                    name: 'Frisbee',
-                    duration: '15-25 min',
-                    description: 'High-energy activity perfect for athletic dogs.',
-                    reason: 'Good weather for outdoor play'
-                });
-            }
-
-            return activities.slice(0, 6); // Return max 6 activities
+            return activities;
         }
 
-        // Tab switching function
         function showTab(tabId) {
-            // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
 
-            // Remove active class from all buttons
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
             });
 
-            // Show selected tab
             document.getElementById(tabId).classList.add('active');
-
-            // Add active class to clicked button
             event.target.classList.add('active');
         }
 
-        // Initialize with default location (Madison, WI)
+        // Initialize
         window.onload = function() {
+            loadSession();
             updateUserMarker(43.0731, -89.4012);
             generateActivityRecommendations(43.0731, -89.4012);
         };
