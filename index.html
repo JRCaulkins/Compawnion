@@ -342,20 +342,13 @@
 
         // Add tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors',
+            attribution: 'Â© OpenStreetMap contributors',
             maxZoom: 19
         }).addTo(map);
 
-        // Sample dog parks in Madison, WI area
-        const dogParks = [
-            { name: "Sycamore Dog Park", lat: 43.0848, lng: -89.4445, description: "Large fenced area with separate small dog section" },
-            { name: "Yahara Heights Park", lat: 43.1101, lng: -89.3156, description: "Popular dog-friendly park with trails" },
-            { name: "Warner Park Dog Exercise Area", lat: 43.1141, lng: -89.3537, description: "Spacious off-leash area near the lake" },
-            { name: "Brittingham Park", lat: 43.0647, lng: -89.3961, description: "Scenic park with dog-friendly areas" },
-            { name: "Olin Park", lat: 43.0586, lng: -89.3863, description: "Waterfront park welcoming dogs on leash" },
-            { name: "Quann Dog Park", lat: 43.0245, lng: -89.5137, description: "Well-maintained dog park in the west side" },
-            { name: "Token Creek Dog Park", lat: 43.1499, lng: -89.2561, description: "Large rural dog park with nature trails" }
-        ];
+        // Load dog parks from external file (dog_parks.js)
+        const dogParks = typeof dogParksData !== 'undefined' ? dogParksData : [];
+
 
         // Add dog park markers
         const dogIcon = L.icon({
