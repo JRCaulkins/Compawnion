@@ -1,0 +1,41 @@
+[
+  {
+    "user_id": 3,
+    "username": "bob_wilson",
+    "total_steps": 90435,
+    "total_distance_km": 120.0,
+    "total_walk_time_minutes": 1335,
+    "total_activities": 30,
+    "avg_duration_per_walk": 44,
+    "most_common_activity": "walk",
+    "most_visited_park": "Warner Park Dog Exercise Area",
+    "preferred_weather": "sunny",
+    "activity_frequency_per_week": 7.2413793103448265
+  },
+  {
+    "user_id": 2,
+    "username": "jane_smith",
+    "total_steps": 90435,
+    "total_distance_km": 120.0,
+    "total_walk_time_minutes": 1335,
+    "total_activities": 30,
+    "avg_duration_per_walk": 44,
+    "most_common_activity": "walk",
+    "most_visited_park": "Warner Park Dog Exercise Area",
+    "preferred_weather": "sunny",
+    "activity_frequency_per_week": 7.2413793103448265
+  },
+  {
+    "user_id": 1,
+    "username": "john_doe",
+    "total_steps": 90435,
+    "total_distance_km": 120.0,
+    "total_walk_time_minutes": 1335,
+    "total_activities": 30,
+    "avg_duration_per_walk": 44,
+    "most_common_activity": "walk",
+    "most_visited_park": "Warner Park Dog Exercise Area",
+    "preferred_weather": "sunny",
+    "activity_frequency_per_week": 7.2413793103448265
+  }
+]
