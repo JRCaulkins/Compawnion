@@ -1,0 +1,26 @@
+Tip_ID,Tip_Text,Tip_URL,Tip_Citation_ID
+WWW_0001,"""Research has shown that simply petting a dog lowers the stress hormone cortisol.""",https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0001
+WWW_0002,"""Research shows that social interaction between people and their dogs actually increases levels of the feel-good hormone oxytocin (the same hormone that bonds mothers to babies).""",https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0002
+WWW_0003,"""84 percent of post-traumatic stress disorder patients paired with a service dog reported a significant reduction in symptoms, and 40 percent were able to decrease their medications, reported a recent survey.""",https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0003
+WWW_0004,"""The American Heart Association released a research report endorsing dog ownership as a way of warding off cardiovascular disease.""",https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0004
+WWW_0005,The cortisol-lowering and oxytocin-boosting benefits of petting a dog has been shown to lower blood pressure.,https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0005
+WWW_0006,"""A 2011 study found that pet owners had better self-esteem.""",https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0006
+WWW_0007,"""A study determined that pets provided greater social support than humans in mitigating depression.""",https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0007
+WWW_0008,"Walk a neighbor’s dog ... or donate time at a local animal shelter—even short interactions provide enough pet exposure to reap physical, emotional, and physical health rewards.",https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0008
+WWW_0009,"According to Jeremy Barron, medical director at John's Hopkins, ""pets are a good social catalyst for meeting people who share your animal interests.""",https://www.hopkinsmedicine.org/health/wellness-and-prevention/the-friend-who-keeps-you-young,Cit_0009
+WWW_0010,"""Over the years, research has shown that pet owners, and particularly dog owners, have greater life satisfaction, enhanced self-esteem, reduced levels of loneliness and anxiety, more ambition and more positive moods.""",https://pmc.ncbi.nlm.nih.gov/articles/PMC6826684/,Cit_0010
+WWW_0011,"A study conducted regarding University students and dogs, ""indicated that interacting with a pet dog considerably reduces anxiety and feelings of sadness and improves happiness scores.""",https://pmc.ncbi.nlm.nih.gov/articles/PMC6826684/,Cit_0011
+WWW_0012,"Studies found that, ""people with severe ambulatory disabilities (e.g., spinal cord
+injuries, traumatic brain injury) who were given a service dog
+showed well-being improvements (e.g., self-esteem, locus of control) within 6 months."" ",https://www.apa.org/pubs/journals/releases/psp-101-6-1239.pdf,Cit_0012
+WWW_0013,"Dogs can help people be more physically fit, less lonely, and less fearful.",https://www.apa.org/pubs/journals/releases/psp-101-6-1239.pdf,Cit_0013
+,,,
+,,,
+,,,
+,,,
+,,,
+Tip_ID,"Unique identifier (e.g., Tip_009)",,
+Tip_Text,The quote that appears in the app box,,
+Tip_URL,The link the user is taken to,,
+Citation_ID,"The link to your citation page (e.g., CIT_WELL_10)",,
+"Tip_ID,Tip_Text,Tip_URL,Citation_ID",,,
