@@ -704,7 +704,7 @@
                     showError('signupError', data.error);
                 }
             } catch (error) {
-                showError('signupError', 'Signup failed. Please try again.');
+                showError('signupError', 'Signup failed. Please try again.' + ' Name:' + error.name + ' Mess:' + error.message + ' Error Stack: ' + error.stack);
             }
         }
 
