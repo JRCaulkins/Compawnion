@@ -13,21 +13,7 @@ import os
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', secrets.token_hex(32))
-
-# Configure CORS properly for GitHub Pages
-CORS(app, 
-     resources={r"/api/*": {
-         "origins": [
-             "https://jrcaulkins.github.io",
-             "http://localhost:*",
-             "http://127.0.0.1:*",
-             "http://localhost:8888"
-         ],
-         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-         "allow_headers": ["Content-Type", "Authorization"],
-         "supports_credentials": True,
-         "max_age": 3600
-     }})
+CORS(app, supports_credentials=True)
 
 # Database configuration
 DB_FILE = 'users.db'
@@ -93,7 +79,7 @@ def init_db():
     
     conn.commit()
     conn.close()
-    print("âœ… Database initialized")
+    print("✅ Database initialized")
 
 def hash_password(password):
     """Hash a password using SHA-256 with salt"""
@@ -115,12 +101,9 @@ def create_session_token():
 
 # ==================== API ENDPOINTS ====================
 
-@app.route('/api/register', methods=['POST', 'OPTIONS'])
+@app.route('/api/register', methods=['POST'])
 def register():
     """Register a new user account"""
-    if request.method == 'OPTIONS':
-        return '', 204
-    
     data = request.json
     
     # Validate input
@@ -165,12 +148,9 @@ def register():
     except sqlite3.IntegrityError as e:
         return jsonify({'error': 'Registration failed: ' + str(e)}), 500
 
-@app.route('/api/login', methods=['POST', 'OPTIONS'])
+@app.route('/api/login', methods=['POST'])
 def login():
     """User login endpoint"""
-    if request.method == 'OPTIONS':
-        return '', 204
-    
     data = request.json
     
     if not data.get('username') or not data.get('password'):
@@ -235,12 +215,9 @@ def login():
     except Exception as e:
         return jsonify({'error': 'Login failed: ' + str(e)}), 500
 
-@app.route('/api/logout', methods=['POST', 'OPTIONS'])
+@app.route('/api/logout', methods=['POST'])
 def logout():
     """User logout endpoint"""
-    if request.method == 'OPTIONS':
-        return '', 204
-    
     session_token = request.headers.get('Authorization') or session.get('session_token')
     
     if session_token:
@@ -257,12 +234,9 @@ def logout():
     session.clear()
     return jsonify({'message': 'Logged out successfully'}), 200
 
-@app.route('/api/user/profile', methods=['GET', 'OPTIONS'])
+@app.route('/api/user/profile', methods=['GET'])
 def get_profile():
     """Get current user's profile"""
-    if request.method == 'OPTIONS':
-        return '', 204
-    
     session_token = request.headers.get('Authorization') or session.get('session_token')
     
     if not session_token:
@@ -320,12 +294,9 @@ def get_profile():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/user/last-login', methods=['GET', 'OPTIONS'])
+@app.route('/api/user/last-login', methods=['GET'])
 def get_last_login():
     """Get user's last login information"""
-    if request.method == 'OPTIONS':
-        return '', 204
-    
     session_token = request.headers.get('Authorization') or session.get('session_token')
     
     if not session_token:
@@ -356,12 +327,9 @@ def get_last_login():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/health', methods=['GET', 'OPTIONS'])
+@app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
-    if request.method == 'OPTIONS':
-        return '', 204
-    
     return jsonify({
         'status': 'healthy',
         'timestamp': datetime.now().isoformat()
@@ -371,13 +339,13 @@ def health_check():
 
 if __name__ == '__main__':
     print("=" * 60)
-    print("ðŸ• Compawnion Backend API Server")
+    print("🐕 Compawnion Backend API Server")
     print("=" * 60)
     
     # Initialize database
     init_db()
     
-    print("\nðŸ“‹ Available Endpoints:")
+    print("\n📋 Available Endpoints:")
     print("  POST   /api/register       - Register new user")
     print("  POST   /api/login          - User login")
     print("  POST   /api/logout         - User logout")
@@ -385,7 +353,7 @@ if __name__ == '__main__':
     print("  GET    /api/user/last-login - Get last login info")
     print("  GET    /api/health         - Health check")
     
-    print("\nðŸš€ Starting server on http://localhost:5000")
+    print("\n🚀 Starting server on http://localhost:5000")
     print("=" * 60)
     
     # Run the server
