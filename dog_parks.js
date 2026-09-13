@@ -1,6 +1,6 @@
 // Auto-generated dog parks data for Compawnion
 // Generated for: Madison, WI
-// Total parks: 31
+// Total parks: 32
 
 const dogParksData = [
   {
@@ -1706,6 +1706,37 @@ const dogParksData = [
       [
         43.1128935,
         -89.3102808
+      ]
+    ],
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Unnamed Dog Park",
+    "lat": 43.01433728,
+    "lng": -89.54137177999999,
+    "description": "Dog park area",
+    "address": "",
+    "amenities": [],
+    "area_bounds": [
+      [
+        43.0144989,
+        -89.5413047
+      ],
+      [
+        43.0141635,
+        -89.5413128
+      ],
+      [
+        43.014138,
+        -89.5413772
+      ],
+      [
+        43.0143871,
+        -89.5415595
+      ],
+      [
+        43.0144989,
+        -89.5413047
       ]
     ],
     "source": "OpenStreetMap"
