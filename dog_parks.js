@@ -566,8 +566,8 @@ const dogParksData = [
   },
   {
     "name": "Quann Park Dog Park",
-    "lat": 43.05031113095238,
-    "lng": -89.38501034523809,
+    "lat": 43.050311316666665,
+    "lng": -89.38501052857143,
     "description": "Dog park area",
     "address": "",
     "amenities": [],
@@ -697,8 +697,8 @@ const dogParksData = [
         -89.386867
       ],
       [
-        43.050364,
-        -89.3867881
+        43.0503718,
+        -89.3867958
       ],
       [
         43.0504995,
